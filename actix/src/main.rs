@@ -91,13 +91,13 @@ async fn main() -> Result<()> {
         }
     }
 
-    info!("Starting cleanup service, will run once every hour.");
+    info!("Starting cleanup service, will run once every 12 hours.");
     spawn(async move {
         let db = database::open_db(&db_location, conf.use_wal_mode, conf.ensure_acid);
-        let mut interval = time::interval(time::Duration::from_secs(3600));
-        loop {
-            interval.tick().await;
-            database::cleanup(&db, conf.use_wal_mode);
+        //let mut interval = time::interval(time::Duration::from_secs(43200));
+        //loop {
+            //interval.tick().await;
+            //database::cleanup(&db, conf.use_wal_mode);
         }
     });
 
